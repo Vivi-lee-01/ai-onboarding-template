@@ -1,0 +1,54 @@
+[
+  {
+    "name": "step5-retrospective",
+    "description": "Phase 1 — 회고 템플릿 제공 및 산출물 정리 안내 검증",
+    "prompt": "/step5-wrapup",
+    "assertions": [
+      "회고 문서 템플릿을 제공해야 한다",
+      "outputs/ 디렉토리의 산출물 목록 확인을 안내해야 한다",
+      "실행 후 STOP하고 사용자 입력을 기다려야 한다"
+    ]
+  },
+  {
+    "name": "step5-action-plan",
+    "description": "Phase 2 — 팀별 킥오프 가이드 및 액션플랜 품질 검증",
+    "prompt": "Phase 2로 진행",
+    "assertions": [
+      "참가자의 팀에 맞는 킥오프 가이드를 제공해야 한다",
+      "액션플랜 템플릿을 제공해야 한다",
+      "Slack/Notion 연동을 통한 현황 파악을 안내해야 한다"
+    ]
+  },
+  {
+    "name": "step5-voc-feedback",
+    "description": "Phase 3 — VoC 피드백 수집 및 Notion 저장 검증",
+    "prompt": "Phase 3로 진행",
+    "assertions": [
+      "4가지 피드백 항목을 AskUserQuestion으로 하나씩 물어봐야 한다",
+      "VoC 피드백 페이지를 Notion에 생성해야 한다",
+      "로컬 백업(step5-voc-feedback.md)을 생성해야 한다",
+      "실행 후 STOP하고 사용자 입력을 기다려야 한다"
+    ]
+  },
+  {
+    "name": "step5-insight-report",
+    "description": "Phase 4 — AI 인사이트 리포트 자동 생성 및 Slack 공유 검증",
+    "prompt": "피드백 완료했어",
+    "assertions": [
+      "에이전트가 자동으로 6개 섹션의 인사이트 리포트를 생성해야 한다",
+      "신규입사자에게 리포트 내용을 보여주고 수정 기회를 줘야 한다",
+      "확정 후 Slack으로 HR Lead, 직속 리더, 셀 리드에게 공유해야 한다",
+      "인사이트 리포트를 Notion에 저장해야 한다"
+    ]
+  },
+  {
+    "name": "step5-completion",
+    "description": "캠프 완료 시 Notion 업데이트 + Slack 알림 검증",
+    "prompt": "회고 작성 완료했어",
+    "assertions": [
+      "온보딩 완료 축하 멘트를 전달해야 한다",
+      "Notion 칸반 상태 업데이트를 시도해야 한다",
+      "HR({{HR_LEAD}})에게 Slack 완료 알림을 보내야 한다"
+    ]
+  }
+]

@@ -1,0 +1,31 @@
+# 산출물 및 작업 공간
+outputs/
+_workspace/
+.playwright-mcp/
+
+# Claude Code 로컬 설정
+.claude/settings.local.json
+
+# 실 설정 파일 (fork 후 .example 복사해서 사용)
+config/notion-ids.json
+config/team-leads.json
+config/repo-watch-state.json
+
+# 내부 운영 메모
+TODO.md
+
+# 환경변수 및 비밀값
+.env
+.env.*
+
+# 이미지 (노출 방지)
+*.png
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Node (사용 시)
+node_modules/

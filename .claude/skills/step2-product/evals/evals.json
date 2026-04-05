@@ -1,0 +1,33 @@
+[
+  {
+    "name": "step2-core-workflow",
+    "description": "Step 2 핵심 워크플로우: STOP PROTOCOL 준수 여부",
+    "prompt": "Step 2를 시작해줘",
+    "assertions": [
+      "Phase 1에서 개밥먹기 개념과 서비스 제공자 체험 설명이 포함되어야 한다",
+      "EXPLAIN 후 EXECUTE 안내가 이어져야 한다",
+      "'직접 실행해보세요' 또는 이에 준하는 STOP 안내가 포함되어야 한다",
+      "Phase 1에서 CHECK를 먼저 진행하면 안 된다"
+    ]
+  },
+  {
+    "name": "step2-output-quality",
+    "description": "Step 2 산출물 품질: 개밥먹기 노션 문서 완성도",
+    "prompt": "Step 2 전체를 완료하고 산출물을 생성해줘",
+    "assertions": [
+      "outputs/ 폴더에 step2-product-report.md가 생성되어야 한다",
+      "서비스 제공자 체험 요약(Good/Bad)이 포함되어야 한다",
+      "이용자 체험 요약이 포함되어야 한다",
+      "구체적인 개선 제안이 1개 이상 포함되어야 한다"
+    ]
+  },
+  {
+    "name": "step2-notion-integration",
+    "description": "Step 2 Notion 연동: 콘텐츠 fetch 동작",
+    "prompt": "Step 2의 Notion 콘텐츠를 가져와줘",
+    "assertions": [
+      "config/notion-ids.json에서 step2_product ID를 읽어야 한다",
+      "notion-fetch MCP로 해당 페이지 콘텐츠를 가져와야 한다"
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "name": "step1-core-workflow",
+    "description": "Step 1 핵심 워크플로우: STOP PROTOCOL 준수 여부",
+    "prompt": "Step 1을 시작해줘",
+    "assertions": [
+      "Phase 1에서 컬쳐덱/일하는 방식 설명이 포함되어야 한다",
+      "EXPLAIN 후 EXECUTE 안내가 이어져야 한다",
+      "'직접 실행해보세요' 또는 이에 준하는 STOP 안내가 포함되어야 한다",
+      "Phase 1에서 CHECK를 먼저 진행하면 안 된다",
+      "Phase 1에서 AskUserQuestion을 호출하면 안 된다"
+    ]
+  },
+  {
+    "name": "step1-output-quality",
+    "description": "Step 1 산출물 품질: 체크리스트 완성도",
+    "prompt": "Step 1 전체를 완료하고 산출물을 생성해줘",
+    "assertions": [
+      "outputs/ 폴더에 step1-checklist.md가 생성되어야 한다",
+      "Slack 채널 가입 항목이 포함되어야 한다",
+      "Google 계정/이메일 서명 설정 항목이 포함되어야 한다",
+      "{{HR_SYSTEM}} 가입 항목이 포함되어야 한다",
+      "자기소개 초안이 포함되어야 한다"
+    ]
+  },
+  {
+    "name": "step1-notion-integration",
+    "description": "Step 1 Notion 연동: 콘텐츠 fetch 동작",
+    "prompt": "Step 1의 Notion 콘텐츠를 가져와줘",
+    "assertions": [
+      "config/notion-ids.json에서 step1_general ID를 읽어야 한다",
+      "notion-fetch MCP로 해당 페이지 콘텐츠를 가져와야 한다",
+      "가져온 콘텐츠의 핵심 항목을 정리해서 보여줘야 한다"
+    ]
+  }
+]

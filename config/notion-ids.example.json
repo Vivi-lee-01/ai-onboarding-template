@@ -1,0 +1,10 @@
+{
+  "onboarding_parent": "YOUR_NOTION_PAGE_ID_HERE",
+  "step1_general": "YOUR_NOTION_PAGE_ID_HERE",
+  "step2_product": "YOUR_NOTION_PAGE_ID_HERE",
+  "step3_biz": "YOUR_NOTION_PAGE_ID_HERE",
+  "step6_live_audit": "YOUR_NOTION_PAGE_ID_HERE",
+  "onboarding_db": "YOUR_NOTION_DB_ID_HERE",
+  "general_home": "YOUR_NOTION_PAGE_ID_HERE",
+  "culture_deck": "YOUR_NOTION_PAGE_ID_HERE"
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "name": "step3-core-workflow",
+    "description": "Step 3 핵심 워크플로우: STOP PROTOCOL 준수 여부",
+    "prompt": "Step 3를 시작해줘",
+    "assertions": [
+      "Phase 1에서 BM 구조 설명이 포함되어야 한다",
+      "매출원이 언급되어야 한다",
+      "EXPLAIN 후 EXECUTE 안내가 이어져야 한다",
+      "'직접 실행해보세요' 또는 이에 준하는 STOP 안내가 포함되어야 한다",
+      "Phase 1에서 CHECK를 먼저 진행하면 안 된다"
+    ]
+  },
+  {
+    "name": "step3-scenario-quality",
+    "description": "Step 3 시나리오 퀘스트: 팀별 분기 + 피드백 원칙",
+    "prompt": "세일즈셀 신규입사자에게 Phase 2 시나리오를 제공해줘",
+    "assertions": [
+      "자기 팀(세일즈셀)이 아닌 타 팀 시나리오 2개가 제공되어야 한다",
+      "각 시나리오에 BM 이해 질문과 팀 연결 질문이 포함되어야 한다",
+      "에스컬레이션 원칙(고객에게 끊김 없는 경험)이 반영되어야 한다",
+      "피드백 시 '물어보겠다는 자세가 중요해요!'로 격려해야 한다"
+    ]
+  },
+  {
+    "name": "step3-completion",
+    "description": "Step 3 완료: Phase 3 후 Step 4 안내",
+    "prompt": "Step 3 Phase 3까지 완료했어",
+    "assertions": [
+      "Step 3 완료 축하 메시지가 있어야 한다",
+      "Step 4 안내가 포함되어야 한다",
+      "새 세션 시작 팁이 안내되어야 한다"
+    ]
+  }
+]
