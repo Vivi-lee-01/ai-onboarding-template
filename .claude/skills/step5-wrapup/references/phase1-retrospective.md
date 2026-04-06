@@ -28,9 +28,9 @@
 - 기대: 솔직한 답변이면 OK. 정답 없음 — 자기 성장을 돌아보는 것 자체가 목적
 - VoC가 충분히 수집되었으면: "피드백 감사합니다! 이 의견은 다음 입사자의 온보딩을 더 좋게 만드는 데 쓰일 거예요."
 
-> **에이전트 지시 — VoC를 HR({{HR_LEAD}})에게 Slack DM 전달**:
-> Phase 1 CHECK 완료 후, 수집된 회고 + VoC 내용을 요약하여 {{HR_LEAD}}에게 Slack DM을 보낸다.
-> `config/team-leads.json`에서 {{HR_LEAD}}의 Slack ID를 조회한다.
+> **에이전트 지시 — VoC를 HR(Dana)에게 Slack DM 전달**:
+> Phase 1 CHECK 완료 후, 수집된 회고 + VoC 내용을 요약하여 Dana에게 Slack DM을 보낸다.
+> `config/team-leads.json`에서 Dana의 Slack ID를 조회한다.
 >
 > 메시지 형식:
 > ```

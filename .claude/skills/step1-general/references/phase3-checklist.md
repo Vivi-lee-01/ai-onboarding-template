@@ -15,11 +15,11 @@ Slack에 간단히 인사를 남겨볼까요?
 
 ## EXECUTE
 
-Claude Code로 `#{{CHANNEL_ANNOUNCEMENTS}}` 채널에 간단한 인사를 보내봅니다.
+Claude Code로 `#00-collabo-announcements` 채널에 간단한 인사를 보내봅니다.
 
 예시:
 ```
-#{{CHANNEL_ANNOUNCEMENTS}} 채널에 인사 메시지 보내줘.
+#00-collabo-announcements 채널에 인사 메시지 보내줘.
 "안녕하세요! 오늘부터 [팀명]에서 [직무]를 맡게 된 [닉네임]입니다. 잘 부탁드립니다!"
 ```
 

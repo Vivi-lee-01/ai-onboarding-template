@@ -39,7 +39,11 @@ Phase B (두 번째 턴):
 1. references/에서 해당 Phase 파일의 CHECK 섹션을 읽는다
 2. AskUserQuestion으로 완료 확인을 한다
 3. 피드백 + 격려
-4. 다음 Phase로 이동할지 AskUserQuestion으로 묻는다
+4. AskUserQuestion으로 묻는다:
+   "다음 Phase로 넘어갈까요?
+    1. 넘어갈게요
+    2. 조금 더 알아보고 싶어요"
+   → "2"를 선택하면 질문/재실습을 자유롭게 진행한 뒤 다시 4번을 묻는다
 
 ## References 파일 맵
 

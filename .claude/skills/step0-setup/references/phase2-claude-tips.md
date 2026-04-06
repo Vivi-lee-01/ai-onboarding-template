@@ -47,10 +47,13 @@ Claude Code에는 몇 가지 **모드**가 있어요:
 |------|---------|------|-----------|
 | 기본 | **Ask permissions** | 매번 실행 전에 허락을 물어봄 | 기본값 |
 | 편집 자동 | **Auto accept edits** | 파일 읽기/편집은 자동, 명령어만 물어봄 | `Shift+Tab` |
-| 자동 | **Auto mode** | 모든 작업을 자동으로 실행 (중단 없이 쭉 진행) | `Shift+Tab` 두 번 |
-| 계획 | **Plan mode** | 실행 않고 계획만 세움 | `Shift+Tab` 세 번 |
+| 계획 | **Plan mode** | 실행 않고 계획만 세움 | `Shift+Tab` 두 번 |
+| 자동 | **Auto mode** | 모든 작업을 자동으로 실행 (중단 없이 쭉 진행) | `claude --enable-auto-mode` |
 
-> 온보딩 중에는 **Auto mode**를 권장해요! Claude가 끊김 없이 자연스럽게 안내해줍니다. 모드 전환은 `Shift+Tab`을 눌러서 할 수 있어요.
+> `Shift+Tab`은 **Ask permissions ↔ Auto accept edits ↔ Plan mode** 사이를 순환해요.
+> **Auto mode**는 별도로, 세션 시작 시 `claude --enable-auto-mode` 명령어로 활성화해야 합니다.
+>
+> 온보딩 중에는 **Auto mode**를 권장해요! Claude가 끊김 없이 자연스럽게 안내해줍니다.
 
 ---
 
@@ -86,10 +89,10 @@ Claude Code에는 몇 가지 **모드**가 있어요:
 
 **4. 모드 전환 해보기**
 - `Shift+Tab`을 눌러보세요 → **Auto accept edits**로 전환됩니다
-- 다시 `Shift+Tab`을 눌러보세요 → **Auto mode**로 전환됩니다
-- 한 번 더 `Shift+Tab` → **Plan mode**
+- 다시 `Shift+Tab`을 눌러보세요 → **Plan mode**로 전환됩니다
 - 한 번 더 `Shift+Tab` → 다시 **Ask permissions**로 돌아와요
-- **Auto mode로 전환**하고 다음으로! (온보딩 중에는 Auto mode 권장)
+- **Auto mode**를 쓰려면: 이 세션을 `/exit`으로 종료하고, `claude --enable-auto-mode`로 재시작하세요
+- 온보딩 중에는 **Auto mode** 권장!
 
 **5. 대화 압축 체험하기**
 - 아래 명령어를 입력해보세요:
@@ -109,7 +112,7 @@ Claude Code에는 몇 가지 **모드**가 있어요:
 - 각 항목 확인:
   - `/config`에서 Output Style을 설정했는지 (Explanatory 또는 Learning 권장)
   - `/statusline`으로 상태바가 설정되었는지
-  - 모드 전환 후 Auto mode로 설정했는지
+  - `Shift+Tab` 모드 순환을 해봤는지, Auto mode(`claude --enable-auto-mode`)를 이해했는지
   - `/compact` 실행 결과를 봤는지
 - "앞으로 컨텍스트가 차도 당황하지 마세요. Claude가 자동으로 처리합니다!"
 - 궁금한 점이 있으면 답변 후 Step 0 마무리로 진행

@@ -1,11 +1,11 @@
 ---
 name: step2-product
-description: "Step 2 Product Onboarding - 서비스 제공자/이용자 관점 제품 체험, 개밥먹기 노션 문서 작성. 트리거: 'Step 2', 'Product', '제품 체험', '개밥먹기'"
+description: "Step 2 Product Onboarding - 워크스페이스 오너/멤버 관점 제품 체험, 개밥먹기 노션 문서 작성. 트리거: 'Step 2', 'Product', '제품 체험', '개밥먹기'"
 ---
 
 # Step 2: Product Onboarding
 
-> 서비스 제공자와 이용자, 두 관점으로 {{SERVICE_NAME}}를 직접 체험하고,
+> 워크스페이스 오너와 멤버, 두 관점으로 콜라보를 직접 체험하고,
 > 개밥먹기 노션 문서 + AI 개선안을 Notion에 생성한다.
 
 ## 산출물
@@ -38,7 +38,11 @@ Phase B (두 번째 턴):
 1. references/에서 해당 Phase 파일의 CHECK 섹션을 읽는다
 2. AskUserQuestion으로 완료 확인을 한다
 3. 피드백 + 격려
-4. 다음 Phase로 이동할지 AskUserQuestion으로 묻는다
+4. AskUserQuestion으로 묻는다:
+   "다음 Phase로 넘어갈까요?
+    1. 넘어갈게요
+    2. 조금 더 알아보고 싶어요"
+   → "2"를 선택하면 질문/재실습을 자유롭게 진행한 뒤 다시 4번을 묻는다
 
 ## Notion 동적 참조
 
@@ -50,7 +54,7 @@ Step 2 Product Onboarding Notion 페이지(`step2_product` ID)를 fetch하여
 | Phase | 파일 | 내용 |
 |-------|------|------|
 | Phase 0 | `references/phase0-product-team.md` | 제품팀 + 개발팀 조직 소개 |
-| Phase 1 | `references/phase1-experience.md` | 서비스 제공자 + 이용자 체험 (통합) |
+| Phase 1 | `references/phase1-experience.md` | 워크스페이스 오너 + 멤버 체험 (통합) |
 | Phase 2 | `references/phase2-report.md` | AI 제품 개선안 생성 (선택) |
 
 ## 진행 흐름
@@ -58,7 +62,7 @@ Step 2 Product Onboarding Notion 페이지(`step2_product` ID)를 fetch하여
 스킬이 시작되면:
 1. Step 2의 목표와 "개밥먹기" 개념을 간단히 안내한다
 2. **Phase 0에서 제품팀 조직 구조를 먼저 소개**한다 (제품 체험 전 맥락 제공)
-3. Phase 1에서 서비스 제공자 + 이용자 체험을 **한 번에 안내** + **개밥먹기 노션 문서에 기록**
+3. Phase 1에서 워크스페이스 오너 + 멤버 체험을 **한 번에 안내** + **개밥먹기 노션 문서에 기록**
 4. Phase 2에서 AI 개선안 생성 여부를 **선택** (필수가 아님)
 5. Step 2 마무리 멘트 + Step 3 안내
 
@@ -66,20 +70,20 @@ Step 2 Product Onboarding Notion 페이지(`step2_product` ID)를 fetch하여
 
 Step 2 완료 시 다음을 순서대로 수행한다:
 
-### 1. 도메인 오너({{CPO_NAME}})에게 커피챗 요청 Slack DM 발송
+### 1. 도메인 오너(Alex)에게 커피챗 요청 Slack DM 발송
 
-`config/team-leads.json`의 `step_domain_owners.step2`에서 {{CPO_NAME}}의 Slack ID를 가져와 DM을 보낸다.
+`config/team-leads.json`의 `step_domain_owners.step2`에서 Alex의 Slack ID를 가져와 DM을 보낸다.
 
 메시지 예시:
-> "안녕하세요 {{CPO_NAME}}님! {닉네임}({직무})입니다. Product Onboarding을 마쳤는데, 제품에 대해 더 여쭤보고 싶은 게 있어요. 편하신 시간에 커피챗 한 번 가능할까요? ☕"
+> "안녕하세요 Alex님! {닉네임}({직무})입니다. Product Onboarding을 마쳤는데, 제품에 대해 더 여쭤보고 싶은 게 있어요. 편하신 시간에 커피챗 한 번 가능할까요? ☕"
 
-⚠️ 단, 신규입사자의 소속 팀이 제품팀({{CPO_NAME}} 직속)인 경우 → 이미 팀 내에서 만날 수 있으므로 스킵
+⚠️ 단, 신규입사자의 소속 팀이 제품팀(Alex 직속)인 경우 → 이미 팀 내에서 만날 수 있으므로 스킵
 
 ### 2. 대상자에게 안내 + 세션 관리 메시지
 
-> "{{CPO_NAME}}(CPO)님께 커피챗 요청 메시지를 보냈어요! ☕ 제품에 대해 궁금한 점을 직접 여쭤볼 수 있는 좋은 기회가 될 거예요.
+> "Alex(CPO)님께 커피챗 요청 메시지를 보냈어요! ☕ 제품에 대해 궁금한 점을 직접 여쭤볼 수 있는 좋은 기회가 될 거예요.
 >
-> Step 2가 완료되었어요! 🎉 서비스 제공자와 이용자 관점을 모두 체험했네요.
+> Step 2가 완료되었어요! 🎉 워크스페이스 오너와 멤버 관점을 모두 체험했네요.
 > **팁**: Step 3은 BM과 고객 여정을 깊이 파고드는 단계예요. 새 세션에서 시작하면 더 집중된 응답을 받을 수 있어요.
 > `/clear` 또는 새 터미널에서 `/onboarding 이어하기`로 시작하세요.
 > 물론 지금 바로 이어서 진행해도 괜찮아요!"

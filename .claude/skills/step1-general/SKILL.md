@@ -5,7 +5,7 @@ description: "Step 1 General Onboarding - 회사 문화, 업무 도구 세팅, S
 
 # Step 1: General Onboarding
 
-> {{COMPANY_NAME}}의 문화를 이해하고, 업무 도구를 세팅하고, Slack 인사를 보내는 단계.
+> 팀스페이스의 문화를 이해하고, 업무 도구를 세팅하고, Slack 인사를 보내는 단계.
 
 ## 산출물
 
@@ -34,7 +34,11 @@ Phase B (두 번째 턴):
 1. references/에서 해당 Phase 파일의 CHECK 섹션을 읽는다
 2. AskUserQuestion으로 완료 확인을 한다
 3. 피드백 + 격려
-4. 다음 Phase로 이동할지 AskUserQuestion으로 묻는다
+4. AskUserQuestion으로 묻는다:
+   "다음 Phase로 넘어갈까요?
+    1. 넘어갈게요
+    2. 조금 더 알아보고 싶어요"
+   → "2"를 선택하면 질문/재실습을 자유롭게 진행한 뒤 다시 4번을 묻는다
 
 ## Notion 동적 참조
 
@@ -51,7 +55,7 @@ Phase B (두 번째 턴):
 | Phase | 파일 | 내용 |
 |-------|------|------|
 | Phase 1 | `references/phase1-culture.md` | 컬쳐덱 + 일하는 방식 |
-| Phase 2 | `references/phase2-tools.md` | Slack/Google/{{HR_SYSTEM}}/{{OFFICE_APP}} 세팅 |
+| Phase 2 | `references/phase2-tools.md` | Slack/Google/Flex/헤이그라운드 세팅 |
 | Phase 3 | `references/phase3-checklist.md` | Slack 인사 보내기 |
 
 ## 진행 흐름

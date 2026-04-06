@@ -24,9 +24,9 @@ Phase 3까지 Claude Code 환경을 완성했어요! 이제 마지막 하나만 
 
 ### 리더보드 등록하기
 
-1. 리더보드 사이트에 접속하세요: https://{{LEADERBOARD_URL}}
-2. **@{{COMPANY_DOMAIN}} Google 계정**으로 로그인하세요
-3. 로그인 후 **설정 페이지**로 이동하세요 (https://{{LEADERBOARD_URL}}/settings)
+1. 리더보드 사이트에 접속하세요: https://internal-leaderboard-pi.vercel.app
+2. **@teamspace.io Google 계정**으로 로그인하세요
+3. 로그인 후 **설정 페이지**로 이동하세요 (https://internal-leaderboard-pi.vercel.app/settings)
 4. **Setup 명령어**를 복사하세요
 5. **터미널**을 열고 (Mac: Spotlight에서 '터미널' 검색) 복사한 명령어를 붙여넣고 Enter
 6. `✅ 설정 완료!`가 나오면 성공!
@@ -34,11 +34,7 @@ Phase 3까지 Claude Code 환경을 완성했어요! 이제 마지막 하나만 
    ```
    ~/.claude-leaderboard/collector.sh
    ```
-8. **자동 수집 전환 (권장)** — 아래 명령어를 실행하세요:
-   ```
-   bash ~/.claude-leaderboard/switch-to-launchd.sh
-   ```
-   이걸 하면 Mac이 깨어날 때 밀린 수집도 자동으로 실행돼요.
+   > Setup 스크립트가 launchd 자동 수집까지 함께 설정하므로, 별도 전환 없이 Mac이 깨어날 때 밀린 수집도 자동으로 실행돼요.
 
 다 해봤으면 "완료" 또는 "다음"이라고 입력해주세요!
 
@@ -52,5 +48,5 @@ Phase 3까지 Claude Code 환경을 완성했어요! 이제 마지막 하나만 
   - collector 설치 + 첫 수집이 완료됐는지 (`~/.claude-leaderboard/` 폴더 존재 여부로 확인 가능)
   - launchd 전환까지 했는지 (선택)
 - "축하해요! 리더보드까지 세팅 완료! 이제 진짜 모든 환경이 준비됐어요."
-- 리더보드 관련 궁금한 점은 SalesLead에게 문의하라고 안내
+- 리더보드 관련 궁금한 점은 Jake에게 문의하라고 안내
 - 궁금한 점이 있으면 답변 후 Step 0 마무리로 진행

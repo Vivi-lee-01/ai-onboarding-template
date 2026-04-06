@@ -4,7 +4,7 @@
 
 ## Phase 1: 컬쳐 이해
 
-- [ ] 회사 소개 ({{COMPANY_NAME}} / {{SERVICE_NAME}}) 확인
+- [ ] 회사 소개 (팀스페이스 / 콜라보) 확인
 - [ ] 컬쳐덱 (STEP BOOK) 읽기
 - [ ] 핵심 가치 3가지 이해
 
@@ -12,13 +12,13 @@
 
 - [ ] Slack 채널 참여 + 프로필 설정
 - [ ] Google Workspace 로그인 + 캘린더 확인
-- [ ] {{HR_SYSTEM}} 가입 + 근태 시스템 이해
-- [ ] {{OFFICE_APP}} 앱 설치 + 회의실 예약 방법 확인
+- [ ] Flex 가입 + 근태 시스템 이해
+- [ ] 헤이그라운드 앱 설치 + 회의실 예약 방법 확인
 
 ## Phase 3: 마무리
 
 - [ ] 이 체크리스트 완성
-- [ ] Slack #{{CHANNEL_ANNOUNCEMENTS}}에 인사 메시지 보내기
+- [ ] Slack #00-collabo-announcements에 인사 메시지 보내기
 
 ## 메모
 

@@ -16,30 +16,30 @@
         "CX셀": { "nickname": "CXLead", "role": "셀 리드", "slack_id": "UXXXXXXXXXX", "members": ["CX1", "CX2"], "description": "고객 경험" }
       }
     },
-    "사업팀": {
+    "Growth팀": {
       "leader": { "nickname": "{{CBO_NAME}}", "role": "CBO", "slack_id": "UXXXXXXXXXX" },
       "cells": {
-        "세일즈셀": { "nickname": "SalesLead", "role": "셀 리드", "slack_id": "UXXXXXXXXXX", "description": "영업" }
+        "Sales셀": { "nickname": "SalesLead", "role": "셀 리드", "slack_id": "UXXXXXXXXXX", "description": "영업" }
       }
     },
-    "경영관리팀": {
+    "Operations팀": {
       "leader": { "nickname": "AdminLead", "role": "실장", "slack_id": "UXXXXXXXXXX" },
       "cells": {
-        "HR셀": { "nickname": "{{HR_LEAD}}", "role": "셀 리드", "slack_id": "{{HR_LEAD_SLACK_ID}}", "description": "채용, 평가보상, 조직문화" }
+        "People셀": { "nickname": "{{HR_LEAD}}", "role": "셀 리드", "slack_id": "{{HR_LEAD_SLACK_ID}}", "description": "채용, 평가보상, 조직문화" }
       }
     }
   },
   "cell_to_team": {
-    "세일즈셀": "사업팀",
+    "Sales셀": "Growth팀",
     "BE셀": "개발팀",
     "FE셀": "개발팀",
     "PM": "제품팀",
     "PD": "제품팀",
     "CX셀": "제품팀",
-    "HR셀": "경영관리팀"
+    "People셀": "Operations팀"
   },
   "step_domain_owners": {
     "step2_product": { "team": "제품팀", "contact": "{{CPO_NAME}}", "slack_id": "UXXXXXXXXXX" },
-    "step3_biz": { "team": "사업팀", "contact": "{{CBO_NAME}}", "slack_id": "UXXXXXXXXXX" }
+    "step3_biz": { "team": "Growth팀", "contact": "{{CBO_NAME}}", "slack_id": "UXXXXXXXXXX" }
   }
 }

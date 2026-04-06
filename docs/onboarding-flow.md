@@ -26,7 +26,7 @@ flowchart TD
     subgraph S1 ["Step 1 — General Onboarding"]
         direction TB
         S1P1["Phase 1 · 컬쳐덱<br/>조직 문화 + 일하는 방식"]
-        S1P2["Phase 2 · 업무 도구 세팅<br/>Slack / Google / {{HR_SYSTEM}} / {{OFFICE_APP}}"]
+        S1P2["Phase 2 · 업무 도구 세팅<br/>Slack / Google / Flex / 헤이그라운드"]
         S1P3["Phase 3 · Slack 인사<br/>#general 자기소개 보내기"]
         S1P1 --> S1P2 --> S1P3
     end
@@ -37,24 +37,24 @@ flowchart TD
     subgraph S2 ["Step 2 — Product Onboarding"]
         direction TB
         S2P0["Phase 0 · 조직 소개<br/>제품팀 + 개발팀 구조"]
-        S2P1["Phase 1 · 제품 체험<br/>서비스 제공자 + 이용자 관점<br/>📝 개밥먹기 노션 문서 작성"]
+        S2P1["Phase 1 · 제품 체험<br/>워크스페이스 오너 + 멤버 관점<br/>📝 개밥먹기 노션 문서 작성"]
         S2P2["Phase 2 · AI 개선안<br/>(선택) Claude가 분석한 제품 개선 제안"]
         S2P0 --> S2P1 --> S2P2
     end
 
-    S2 -->|"☕ {{CPO_NAME}}(CPO)에게 커피챗 DM"| S3
+    S2 -->|"☕ Alex(CPO)에게 커피챗 DM"| S3
 
     %% ── Step 3 ──
     subgraph S3 ["Step 3 — Biz Onboarding"]
         direction TB
-        S3P0["Phase 0 · 조직 소개<br/>사업팀 + 경영관리팀 구조"]
+        S3P0["Phase 0 · 조직 소개<br/>Growth팀 + Operations팀 구조"]
         S3P1["Phase 1 · BM 학습<br/>비즈니스 모델 + 경쟁 포지셔닝<br/>시장 데이터 + 용어집 + 고객 여정"]
         S3P2["Phase 2 · 시나리오 퀘스트<br/>🔀 팀별 분기: 타 팀 연계 시나리오 2개<br/>→ Slack DM 인사 퀘스트"]
         S3P3["Phase 3 · 팀별 심화<br/>소속 팀 BM 연결 + 업무 도구"]
         S3P0 --> S3P1 --> S3P2 --> S3P3
     end
 
-    S3 -->|"☕ {{CBO_NAME}}(CBO)에게 커피챗 DM"| S4
+    S3 -->|"☕ Morgan(CBO)에게 커피챗 DM"| S4
 
     %% ── Step 4 ──
     subgraph S4 ["Step 4 — Build Your First Skill"]
@@ -70,7 +70,7 @@ flowchart TD
     %% ── Step 5 ──
     subgraph S5 ["Step 5 — Wrap Up"]
         direction TB
-        S5P1["Phase 1 · 회고 + VoC<br/>오픈 대화로 온보딩 회고<br/>📨 피드백을 HR({{HR_LEAD}})에게 Slack DM"]
+        S5P1["Phase 1 · 회고 + VoC<br/>오픈 대화로 온보딩 회고<br/>📨 피드백을 HR(Dana)에게 Slack DM"]
         S5P2["Phase 2 · 킥오프 조언<br/>팀 합류 전 가벼운 조언"]
         S5P1 --> S5P2
     end
@@ -81,20 +81,20 @@ flowchart TD
     ONBOARD_EXTRACT --> S6_GUIDE
 
     %% ── Step 6 안내 (Step 5 직후) ──
-    S6_GUIDE["Step 6 간단 안내<br/>Notion 실서비스 참관 가이드 URL 전달<br/>참관 준비 당부"]
+    S6_GUIDE["Step 6 간단 안내<br/>Notion Enterprise 온보딩 세션 참관 가이드 URL 전달<br/>백오피스 확인 당부"]
 
-    S6_GUIDE --> NOTIFY["🔔 자동 Slack 알림<br/>팀장/셀 리드 + HR({{HR_LEAD}})에게<br/>온보딩 완료 DM 발송"]
+    S6_GUIDE --> NOTIFY["🔔 자동 Slack 알림<br/>팀장/셀 리드 + HR(Dana)에게<br/>온보딩 완료 DM 발송"]
 
     NOTIFY --> DONE(["✅ 클로드 온보딩 종료"])
 
     %% ── Step 6 (비동기) ──
-    DONE -.->|"참관 일정에 맞춰 비동기"| S6
+    DONE -.->|"라이브 일정에 맞춰 비동기"| S6
 
-    subgraph S6 ["Step 6 — 실서비스 참관 (비동기)"]
+    subgraph S6 ["Step 6 — Enterprise 온보딩 세션 참관 (비동기)"]
         direction TB
-        S6P1["Phase 1 · 참관 준비<br/>참관 대상 확인 + 일정 선택"]
-        S6GAP["⏸️ 참관 당일<br/>모니터링 채널 참여"]
-        S6P2["Phase 2 · 모니터링 리포트<br/>참관 관찰 내용 정리 + Notion 저장"]
+        S6P1["Phase 1 · 청강 준비<br/>백오피스 라이브 확인 + 일정 선택"]
+        S6GAP["⏸️ 라이브 당일 청강<br/>#cs-enterprise-support 스레드 참여"]
+        S6P2["Phase 2 · 모니터링 리포트<br/>청강 관찰 내용 정리 + Notion 저장"]
         S6P1 --> S6GAP --> S6P2
     end
 
@@ -145,9 +145,9 @@ flowchart LR
     subgraph TRIGGERS ["자동화 트리거"]
         direction TB
         T1["🏁 온보딩 시작<br/>→ Notion 칸반 카드 + 개밥먹기 문서 자동 생성"]
-        T2["📦 Step 2 완료<br/>→ {{CPO_NAME}}(CPO)에게 커피챗 Slack DM"]
-        T3["📦 Step 3 완료<br/>→ {{CBO_NAME}}(CBO)에게 커피챗 Slack DM"]
-        T4["📨 Step 5 Phase 1<br/>→ VoC 피드백을 HR({{HR_LEAD}})에게 Slack DM"]
+        T2["📦 Step 2 완료<br/>→ Alex(CPO)에게 커피챗 Slack DM"]
+        T3["📦 Step 3 완료<br/>→ Morgan(CBO)에게 커피챗 Slack DM"]
+        T4["📨 Step 5 Phase 1<br/>→ VoC 피드백을 HR(Dana)에게 Slack DM"]
         T5["✅ 온보딩 종료<br/>→ 팀장 + HR에게 완료 Slack DM"]
         T6["📝 매 Step 완료<br/>→ progress.json 업데이트"]
     end
@@ -162,5 +162,5 @@ flowchart LR
 따라하기          응용하기           만들기
 ─────────→  ──────────────→  ──────────→
 Step 0~1       Step 2~3          Step 4~5     Step 6(실전)
-  설치·세팅      제품·BM 체험       스킬 구축      실서비스 참관
+  설치·세팅      제품·BM 체험       스킬 구축      Enterprise 온보딩 세션 참관
 ```
