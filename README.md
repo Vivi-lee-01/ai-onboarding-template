@@ -81,7 +81,32 @@ claude
 | **Step 5** | Wrap Up | 회고 + 팀 킥오프 조언 | - |
 | **Step 6** | Live Audit | 실서비스 참관 (선택) | 참관 리포트 |
 
-전체 흐름도: [`docs/onboarding-flow.md`](docs/onboarding-flow.md)
+### 시나리오 플로우
+
+> 상세 다이어그램은 [`docs/onboarding-flow.md`](docs/onboarding-flow.md)에서 확인할 수 있습니다.
+
+```mermaid
+flowchart TD
+    START(["/onboarding 실행"]) --> INIT["닉네임 / 직무 / 팀 입력<br/>Notion 칸반 카드 자동 생성"]
+
+    INIT --> S0["🔧 Step 0 — 환경 설정<br/>Phase 0 로드맵 · Phase 1 MCP · Phase 2 팁 · Phase 3 세팅 · Phase 4 리더보드"]
+    S0 --> S1["🏢 Step 1 — General Onboarding<br/>Phase 1 컬쳐덱 · Phase 2 도구 세팅 · Phase 3 Slack 인사"]
+    S1 --> S2["📦 Step 2 — Product Onboarding<br/>Phase 0 조직 · Phase 1 제품 체험 · Phase 2 AI 개선안"]
+    S2 -->|"☕ CPO 커피챗 DM"| S3["💼 Step 3 — Biz Onboarding<br/>Phase 0 조직 · Phase 1 BM · Phase 2 시나리오 · Phase 3 팀 심화"]
+    S3 -->|"☕ CGO 커피챗 DM"| S4["🛠️ Step 4 — Build Your First Skill<br/>Phase 1 해부 · Phase 2 설계 · Phase 3 구현+PR"]
+    S4 --> S5["🔄 Step 5 — Wrap Up<br/>Phase 1 회고+VoC · Phase 2 킥오프 조언"]
+    S5 -->|"📨 VoC → HR Slack DM<br/>🔔 완료 알림 → 팀장+HR"| DONE(["✅ 온보딩 종료"])
+    DONE -.->|"비동기 · 세션 일정에 맞춰"| S6["🎬 Step 6 — 실서비스 참관<br/>Phase 1 준비 → ⏸️ 참관 → Phase 2 리포트"]
+    S6 --> FINAL(["🎉 온보딩 완주"])
+
+    classDef stepNode fill:#f0f4ff,stroke:#4a6cf7,stroke-width:2px,color:#1a1a2e
+    classDef actionNode fill:#fef3c7,stroke:#f59e0b,stroke-width:1px,color:#78350f
+    classDef endNode fill:#d1fae5,stroke:#10b981,stroke-width:2px,color:#065f46
+
+    class S0,S1,S2,S3,S4,S5,S6 stepNode
+    class INIT actionNode
+    class DONE,FINAL endNode
+```
 
 ---
 
