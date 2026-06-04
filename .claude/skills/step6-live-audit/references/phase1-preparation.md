@@ -36,10 +36,9 @@ Slack `#cs-enterprise-support` 채널에서:
 ## EXECUTE
 
 > **에이전트 지시 — Notion 원본 문서 안내**:
-> 1. `notion-fetch`로 Enterprise 온보딩 세션 참관 가이드 페이지(`step6_live_audit` ID)를 fetch한다
-> 2. fetch된 내용에서 참관 준비, 체크리스트, 과거 사례 등 보충 정보를 안내한다
-> 3. Notion 원본 링크도 함께 공유: "더 자세한 내용은 이 Notion 문서에서 확인할 수 있어요!"
-> 4. fetch 실패 시: 아래 내용만으로 충분히 안내 가능 (fallback)
+> 1. `config/notion-ids.json`의 `step6_live_audit` ID로 Notion URL을 조립해 링크를 안내한다 (fetch 불필요)
+> 2. 보충 설명이 필요하면 `content/step6-live-audit.md`(로컬 사본)를 참조한다
+> 3. 콘텐츠가 없거나 비어 있으면 아래 인라인 내용만으로 진행한다
 
 ### 1. 예정된 세션 확인
 
@@ -89,12 +88,3 @@ Slack `#cs-enterprise-support` 채널에서:
 > 3영업일 팔로업은 에이전트가 자동으로 보낼 수 없으므로 → HR(Dana)에게 직접 팔로업을 위임
 
 ---
-
-## CHECK
-
-- 질문 1: "참관할 세션을 정하셨나요? 어떤 세션을 선택했는지, Onboarding셀에 참관 요청을 보냈는지 알려주세요!"
-- Admin 접근이 안 되면: Kai에게 권한 요청 안내
-- 질문 2: "세션이 **몇 월 며칠**인지 알려주세요! 리마인더를 설정해드릴게요."
-  - 날짜를 받으면 → 위 "4. 자동 리마인더 설정"의 Slack 예약 메시지 + HR 알림 발송
-  - progress.json에 `session_date` 필드 저장
-- 마무리: "리마인더 설정 완료! 세션 당일 오후에 Slack으로 알려드릴게요. 세션 끝나면 `/onboarding 이어하기`로 돌아와주세요!"

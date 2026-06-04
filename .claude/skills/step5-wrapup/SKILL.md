@@ -13,10 +13,13 @@ description: "Step 5 회고 + 팀 킥오프 조언 — 캠프 전체 회고, 팀
 - progress.json 기록만
 
 ## STOP PROTOCOL — 절대 위반 금지
+> 🔑 **점진적 공개(HARD RULE)**: EXECUTE 과제가 2개 이상이면 한 번에 쏟지 말고 핵심 1개씩 제시→STOP→"다음"으로 진행한다. EXPLAIN은 요약 먼저, 상세는 요청 시 펼친다. (프로젝트 CLAUDE.md "EXECUTE 과제 제시 — 점진적 공개" 참조)
 
 > 이 프로토콜은 이 스킬의 최우선 규칙이다.
 
 ### 각 Phase는 반드시 2턴에 걸쳐 진행한다
+
+> 단, EXECUTE에 참가자가 직접 할 실행 과제가 없는 읽기 전용 Phase는 CLAUDE.md 예외에 따라 EXPLAIN+CHECK를 1턴으로 진행한다.
 
 Phase A (첫 번째 턴):
 1. references/에서 해당 Phase 파일의 EXPLAIN 섹션을 읽는다
@@ -35,11 +38,8 @@ Phase B (두 번째 턴):
 1. references/에서 해당 Phase 파일의 CHECK 섹션을 읽는다
 2. AskUserQuestion으로 확인 질문을 한다
 3. 피드백을 준다
-4. AskUserQuestion으로 묻는다:
-   "다음 Phase로 넘어갈까요?
-    1. 넘어갈게요
-    2. 조금 더 알아보고 싶어요"
-   → "2"를 선택하면 질문/재실습을 자유롭게 진행한 뒤 다시 4번을 묻는다
+4. 기본적으로 다음 Phase로 바로 진행한다. 다만 "더 알아보고 싶거나 멈추고 싶으면 말씀해주세요"라고 한 줄 안내한다.
+   (매 Phase마다 AskUserQuestion으로 진행 여부를 묻지 않는다 — 참가자가 멈추자고 할 때만 멈춘다)
 
 ## References 파일 맵
 
@@ -78,7 +78,7 @@ Step 6 스킬을 호출하지 않고, 아래 내용을 직접 전달한다:
 
 1. progress.json에서 `notion_kanban_ds`를 읽고, 칸반 DB에서 "청강" 키워드로 카드를 검색한다
 2. 찾으면 해당 카드(Enterprise 온보딩 세션 참관) URL을 안내한다: "Enterprise 온보딩 세션 참관 가이드는 여기 있어요!"
-3. 못 찾으면 fallback: `notion-fetch`로 일반 가이드 페이지(`step6_live_audit` ID)를 안내한다
+3. 못 찾으면 fallback: content/step6-live-audit.md 로컬 사본 또는 step6_live_audit ID로 조립한 Notion URL을 안내한다
 3. 다음 3가지를 당부한다:
    - 노션 가이드를 꼭 확인할 것
    - **백오피스**(admin.collabo.io)에서 청강 대상 라이브를 확정할 것

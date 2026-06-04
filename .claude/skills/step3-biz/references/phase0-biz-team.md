@@ -43,9 +43,3 @@ COO **Chris**가 이끄는 Operations팀은 회사 운영 전반을 담당합니
 Growth팀과 Operations팀을 살펴봤어요. 다음 Phase에서는 콜라보가 **어떻게 돈을 벌고 성장하는지** BM을 자세히 알아볼 거예요!
 
 ---
-
-## CHECK
-
-- 질문: "Growth팀과 Operations팀에서 가장 궁금한 셀이 있나요?"
-- 오픈형 — 관심사 파악
-- "이제 콜라보의 비즈니스 모델을 알아볼 차례예요!" → Phase 1로 안내

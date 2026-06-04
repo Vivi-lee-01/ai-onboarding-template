@@ -13,10 +13,13 @@ description: "Step 3 Biz Onboarding - 비즈니스 모델 이해, 고객 여정,
 - progress.json 기록만
 
 ## STOP PROTOCOL — 절대 위반 금지
+> 🔑 **점진적 공개(HARD RULE)**: EXECUTE 과제가 2개 이상이면 한 번에 쏟지 말고 핵심 1개씩 제시→STOP→"다음"으로 진행한다. EXPLAIN은 요약 먼저, 상세는 요청 시 펼친다. (프로젝트 CLAUDE.md "EXECUTE 과제 제시 — 점진적 공개" 참조)
 
 > 이 프로토콜은 이 스킬의 최우선 규칙이다.
 
 ### 각 Phase는 반드시 2턴에 걸쳐 진행한다
+
+> 단, EXECUTE에 신규입사자가 직접 할 실행 과제가 없는 읽기 전용 Phase는 CLAUDE.md 예외에 따라 EXPLAIN+CHECK를 1턴으로 진행한다.
 
 Phase A (첫 번째 턴):
 1. references/에서 해당 Phase 파일의 EXPLAIN 섹션을 읽는다
@@ -29,22 +32,24 @@ Phase A (첫 번째 턴):
 ❌ 절대 하지 않는 것: AskUserQuestion 호출
 ❌ 절대 하지 않는 것: "실행해봤나요?" 질문
 
+❌ **절대 하지 않는 것: 시나리오 본문/Q1/Q2를 AskUserQuestion으로 묻기**
+   → Phase 2의 시나리오는 references 블록을 **그대로 메시지 본문에 출력** 하고,
+     자유 텍스트 답변(예: "b, c")을 기다린 뒤 STOP. AskUserQuestion 사용 금지.
+     이유는 루트 `CLAUDE.md`의 "시나리오·퀴즈 출제 규칙 (HARD RULE)" 참조.
+
 (신규입사자가 "했어", "완료", "다음" 등을 입력)
 
 Phase B (두 번째 턴):
 1. references/에서 해당 Phase 파일의 CHECK 섹션을 읽는다
 2. AskUserQuestion으로 완료 확인을 한다
 3. 피드백 + 격려
-4. AskUserQuestion으로 묻는다:
-   "다음 Phase로 넘어갈까요?
-    1. 넘어갈게요
-    2. 조금 더 알아보고 싶어요"
-   → "2"를 선택하면 질문/재실습을 자유롭게 진행한 뒤 다시 4번을 묻는다
+4. 기본적으로 다음 Phase로 바로 진행한다. 다만 "더 알아보고 싶거나 멈추고 싶으면 말씀해주세요"라고 한 줄 안내한다.
+   (매 Phase마다 AskUserQuestion으로 진행 여부를 묻지 않는다 — 신규입사자가 멈추자고 할 때만 멈춘다)
 
-## Notion 동적 참조
+## 콘텐츠 참조 (로컬 우선)
 
-Step 3 Biz Onboarding Notion 페이지(`step3_biz` ID)를 fetch하여
-최신 BM 정보와 고객 여정을 반영한다.
+BM 정보·고객 여정은 `content/step3-biz.md`(로컬 사본)를 Read하여 반영한다.
+없으면 references 인라인 내용으로 진행. 최신화는 운영자가 `/sync-content`로 갱신.
 
 ## References 파일 맵
 

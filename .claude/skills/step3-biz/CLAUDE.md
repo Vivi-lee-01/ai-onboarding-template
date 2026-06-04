@@ -15,7 +15,7 @@
 ## Notion 참조
 
 `config/notion-ids.json`의 `step3_biz` ID 사용.
-Phase 1의 BM 정보는 Notion에서 최신 데이터를 가져와 보충한다.
+Phase 1의 BM 정보는 content/step3-biz.md 로컬 사본에서 참조한다 (최신화는 /sync-content).
 
 ## 경쟁 포지셔닝 핵심
 

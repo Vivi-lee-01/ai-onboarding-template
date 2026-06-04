@@ -1,256 +1,273 @@
 # 커스터마이징 가이드
 
-이 문서는 온보딩 템플릿을 자사 환경에 맞게 커스터마이징하는 방법을 안내합니다.
+이 문서는 AI Interactive Onboarding Template을 자사 환경에 맞게 바꾸는 방법을 안내합니다.
+
+핵심 전제:
+- 이 템플릿은 현재 가상 회사 **TeamSpace Inc. / Collabo / Dana** 데이터로 채워져 있습니다.
+- 공용 읽기 콘텐츠는 `content/` 로컬 사본을 사용합니다.
+- Notion은 콘텐츠 편집 원본이자 칸반/개인 산출물 저장소입니다.
+- Notion 콘텐츠를 고친 뒤에는 Claude Code에서 `/sync-content`를 실행해 `content/`를 갱신합니다.
 
 ---
 
-## 목차
+## 1. 필수 설정 파일
 
-1. [플레이스홀더 일괄 치환](#1-플레이스홀더-일괄-치환)
-2. [파일별 커스터마이징 가이드](#2-파일별-커스터마이징-가이드)
-3. [사전 학습 노션 페이지 세팅](#3-사전-학습-노션-페이지-세팅)
-4. [sed 일괄 치환 명령어](#4-sed-일괄-치환-명령어)
-5. [선택적 커스터마이징](#5-선택적-커스터마이징)
+먼저 예시 파일을 실제 설정 파일로 복사합니다.
 
----
+```bash
+cp config/notion-ids.example.json config/notion-ids.json
+cp config/team-leads.example.json config/team-leads.json
+```
 
-## 1. 플레이스홀더 일괄 치환
+`config/notion-ids.json`과 `config/team-leads.json`은 `.gitignore`에 포함되어 있어 실수로 커밋되지 않습니다.
 
-템플릿 전체에서 `{{PLACEHOLDER}}` 형태의 값을 자사 정보로 교체해야 합니다.
+### config/notion-ids.json
 
-| 플레이스홀더 | 설명 | 예시 |
-|---|---|---|
-| `{{COMPANY_NAME}}` | 회사명 | 에이비씨 주식회사 |
-| `{{COMPANY_NAME_EN}}` | 회사 영문명 | ABC Corp |
-| `{{SERVICE_NAME}}` | 서비스/제품명 | MyService |
-| `{{COMPANY_DOMAIN}}` | 이메일 도메인 | abc-corp.com |
-| `{{HR_LEAD}}` | HR 담당자 닉네임 | Jane |
-| `{{HR_LEAD_SLACK_ID}}` | HR 담당자 Slack ID | U01ABCD2EFG |
-| `{{CEO_NAME}}` | 대표 이름/닉네임 | Alex |
-| `{{CPO_NAME}}` | CPO 이름/닉네임 (없으면 제품 책임자) | Chris |
-| `{{CBO_NAME}}` | CBO 이름/닉네임 (없으면 사업 책임자) | Morgan |
-| `{{GITHUB_ORG}}` | GitHub Organization 이름 | abc-corp |
-| `{{HR_SYSTEM}}` | 인사관리 시스템 | Flex, HRIS, Workday 등 |
-| `{{OFFICE_APP}}` | 사무실/공유오피스 앱 | 헤이그라운드, WeWork 등 |
-| `{{PASSWORD_MANAGER}}` | 비밀번호 관리 도구 | 1Password, Bitwarden 등 |
-| `{{LEADERBOARD_URL}}` | 사내 Claude Code 리더보드 URL | https://leaderboard.abc-corp.com |
-
-> **참고**: `{{LEADERBOARD_URL}}`은 사내 리더보드를 운영하지 않는 경우 Step 0의 Phase 4(리더보드)를 제거하면 됩니다.
-
----
-
-## 2. 파일별 커스터마이징 가이드
-
-### 우선순위 1: 필수 설정 파일
-
-반드시 자사 정보로 교체해야 온보딩이 동작합니다.
-
-| 파일 | 설명 | 작업 내용 |
-|---|---|---|
-| `CLAUDE.md` | 프로젝트 루트 설정 | 플레이스홀더 치환 (자동 sed로 처리 가능) |
-| `config/notion-ids.json` | Notion 페이지 ID 매핑 | 자사 Notion 페이지 ID로 교체 |
-| `config/team-leads.json` | 조직 구조 및 리더 정보 | 자사 팀/셀/리더 정보 입력 |
-
-#### config/notion-ids.json
-
-온보딩 각 Step에서 Notion MCP로 콘텐츠를 동적 참조합니다. 자사 Notion에 온보딩 페이지를 만든 뒤, 각 페이지 ID를 입력하세요.
+자사 Notion에 온보딩 페이지/DB를 만든 뒤 각 ID를 입력합니다.
 
 ```json
 {
   "onboarding_parent": "온보딩 메인 페이지 ID",
+  "onboarding_db": "온보딩 진행 상황 추적 DB ID",
   "step1_general": "Step 1 General Onboarding 페이지 ID",
   "step2_product": "Step 2 Product Onboarding 페이지 ID",
   "step3_biz": "Step 3 Biz Onboarding 페이지 ID",
   "step6_live_audit": "Step 6 실서비스 참관 페이지 ID",
-  "onboarding_db": "온보딩 진행 상황 추적 DB ID",
-  "general_home": "사내 일반 정보 홈 페이지 ID",
-  "culture_deck": "컬쳐덱 페이지 ID"
+  "github_guide": "GitHub 가이드 페이지 ID",
+  "culture_deck": "컬쳐덱/회사소개 페이지 ID"
 }
 ```
 
-> Notion 페이지 ID는 페이지 URL의 마지막 32자리 문자열입니다.
-> 예: `https://www.notion.so/My-Page-abcdef1234567890abcdef1234567890` → `abcdef1234567890abcdef1234567890`
+Notion 페이지 ID는 페이지 URL의 마지막 32자리 문자열입니다.
+예: `https://www.notion.so/My-Page-abcdef1234567890abcdef1234567890` → `abcdef1234567890abcdef1234567890`
 
-#### config/team-leads.json
+### config/team-leads.json
 
-자사 조직 구조를 반영합니다. `config/team-leads.example.json`을 참고하여 작성하세요.
+자사 조직 구조와 연결 담당자를 입력합니다.
 
-- 팀/셀 이름을 자사에 맞게 변경
-- 각 리더의 닉네임, 역할, Slack ID 입력
-- `cell_to_team` 매핑 업데이트
-- `step_domain_owners`에 Step 2(제품), Step 3(사업) 담당자 지정
-
----
-
-### 우선순위 2: 콘텐츠 파일
-
-자사의 실제 정보를 채워야 온보딩 품질이 올라갑니다.
-
-| 파일 | Step | 설명 | 작업 내용 |
-|---|---|---|---|
-| `.claude/skills/step1-general/references/culture-deck.md` | Step 1 | 컬쳐덱 요약 | 자사 미션, 비전, 핵심가치, 일하는 방식 등 작성 |
-| `.claude/skills/step1-general/references/ir-deck-summary.md` | Step 1 | IR 자료 요약 | 자사 IR 덱 또는 회사 소개 요약 |
-| `.claude/skills/step1-general/references/phase1-culture.md` | Step 1 | 조직문화 Phase 설명 | 자사 조직문화 소개 스크립트 |
-| `.claude/skills/step1-general/references/phase2-tools.md` | Step 1 | 업무 도구 안내 | 자사에서 사용하는 도구(Slack, Notion, Google Workspace 등) 안내 |
-| `.claude/skills/step1-general/references/phase3-checklist.md` | Step 1 | 체크리스트 | 입사 첫 주 체크리스트 항목 |
-| `.claude/skills/step3-biz/references/phase1-bm.md` | Step 3 | BM(비즈니스 모델) | 자사 비즈니스 모델, 수익 구조, 핵심 지표 작성 |
-| `.claude/skills/step3-biz/references/phase2-scenarios-*.md` | Step 3 | 직무별 시나리오 | 각 직무(영업, 제품, 개발, CX, 경영관리 등)의 업무 시나리오 |
-| `.claude/skills/step3-biz/references/phase2-customer.md` | Step 3 | 고객 여정 | 자사 고객 여정 맵 |
-| `.claude/skills/step3-biz/references/phase0-biz-team.md` | Step 3 | 사업팀 소개 | 사업팀 구성과 역할 |
-| `.claude/skills/step2-product/references/phase0-product-team.md` | Step 2 | 제품팀 소개 | 제품팀 구성과 역할 |
-| `.claude/skills/step2-product/references/phase1-experience.md` | Step 2 | 제품 체험 가이드 | 자사 제품/서비스 체험 시나리오 |
+- 팀/셀 이름
+- 각 리더의 닉네임, 역할, Slack ID
+- `cell_to_team` 매핑
+- `step_domain_owners`: Step 2(제품), Step 3(사업) 담당자
 
 ---
 
-### 우선순위 3: Step 0 설치 가이드
+## 2. 회사 정보 일괄 치환
 
-| 파일 | 설명 | 작업 내용 |
+템플릿에 들어 있는 가상 회사 정보를 자사 정보로 바꿉니다.
+
+| 현재 값 | 의미 | 교체 예시 |
 |---|---|---|
-| `.claude/skills/step0-setup/references/phase0-roadmap.md` | 온보딩 로드맵 | 자사에 맞게 Step 구성 조정 |
-| `.claude/skills/step0-setup/references/phase1-mcp-connect.md` | MCP 연결 안내 | 사용하는 MCP 서비스에 맞게 수정 |
-| `.claude/skills/step0-setup/references/phase2-claude-tips.md` | Claude 사용 팁 | 필요 시 자사 맥락 추가 |
-| `.claude/skills/step0-setup/references/phase3-settings-optimization.md` | 설정 최적화 | 자사 워크플로우에 맞게 수정 |
-| `.claude/skills/step0-setup/references/phase4-github-leaderboard.md` | 리더보드 안내 | 리더보드 미운영 시 이 Phase 제거 |
-| `.claude/skills/step0-setup/references/claude-code-install-guide-for-notion.md` | Notion용 설치 가이드 | 아래 "사전 학습 노션 페이지" 섹션 참고 |
+| `TeamSpace Inc.` / `팀스페이스` | 회사명 | ABC Corp / 에이비씨 |
+| `Collabo` / `콜라보` | 서비스명 | MyService |
+| `teamspace.io` | 회사 이메일 도메인 | abc-corp.com |
+| `Dana` / `이다나` | HR Lead | Jane / 김제인 |
+| `teamspace-ai-all` | GitHub Organization | abc-corp-ai |
+| `#00-teamspace-announcements` 등 | Slack 채널 | 자사 채널명 |
+| `admin.collabo.io` | 관리자/백오피스 URL | 자사 백오피스 URL |
+| `워크스페이스 오너` / `멤버` | 제품 사용자 페르소나 | 자사 제품 페르소나 |
+| `Enterprise 온보딩 세션 참관` | Step 6 참관 대상 | 고객 콜, 수업, 상담, 현장 방문 등 |
 
----
-
-### 우선순위 4: 산출물 템플릿
-
-| 파일 | 설명 |
-|---|---|
-| `templates/step1-checklist.md` | Step 1 체크리스트 템플릿 |
-| `templates/step2-product-report.md` | Step 2 제품 리포트 템플릿 |
-| `templates/step3-biz-report.md` | Step 3 BM 리포트 템플릿 |
-
-이 템플릿들은 범용적으로 작성되어 있어 큰 수정 없이 사용 가능하지만, 자사 특성에 맞게 항목을 추가/제거할 수 있습니다.
-
----
-
-## 3. 사전 학습 노션 페이지 세팅
-
-온보딩은 Step 0부터 시작하지만, 그 전에 신규입사자가 Claude Code를 미리 설치해와야 합니다.
-
-### 흐름
-
-```
-[입사 전/입사 당일]
-  Notion 사전 학습 페이지에서 Claude Code 설치
-    ↓
-[온보딩 시작]
-  터미널에서 /onboarding 실행 → Step 0부터 진행
-```
-
-### 세팅 방법
-
-1. `.claude/skills/step0-setup/references/claude-code-install-guide-for-notion.md` 파일을 열어 자사 정보로 수정
-   - HR 담당자 이름 변경
-   - GitHub Organization 이름 변경
-   - 필요 없는 도구(예: 공유오피스 앱) 제거 또는 추가
-2. 수정한 내용을 사내 Notion에 새 페이지로 게시
-3. 신규입사자에게 입사 전 또는 입사 당일 해당 Notion 페이지 링크를 공유
-
-> 이 페이지는 Claude Code 설치, 구독 안내, 레포 클론, MCP 연결까지를 다루는 사전 학습 자료입니다.
-
----
-
-## 4. sed 일괄 치환 명령어
-
-프로젝트 루트에서 아래 명령어를 실행하면 모든 파일의 플레이스홀더를 한 번에 치환할 수 있습니다.
+macOS 기준 예시:
 
 ```bash
-# 자사 정보로 변수 설정
-COMPANY_NAME="에이비씨 주식회사"
-COMPANY_NAME_EN="ABC Corp"
-SERVICE_NAME="MyService"
-COMPANY_DOMAIN="abc-corp.com"
+COMPANY_KO="에이비씨"
+COMPANY_EN="ABC Corp"
+SERVICE_KO="마이서비스"
+SERVICE_EN="MyService"
+DOMAIN="abc-corp.com"
 HR_LEAD="Jane"
-HR_LEAD_SLACK_ID="U01ABCD2EFG"
-CEO_NAME="Alex"
-CPO_NAME="Chris"
-CBO_NAME="Morgan"
-GITHUB_ORG="abc-corp"
-HR_SYSTEM="Flex"
-OFFICE_APP="위워크"
-PASSWORD_MANAGER="1Password"
-LEADERBOARD_URL="https://leaderboard.abc-corp.com"
+GITHUB_ORG="abc-corp-ai"
 
-# 일괄 치환 실행 (macOS sed 기준)
-find . -type f \( -name "*.md" -o -name "*.json" \) \
+find . -type f \( -name "*.md" -o -name "*.json" -o -name "*.yml" -o -name "*.yaml" \) \
   ! -path "./.git/*" \
-  ! -path "./node_modules/*" \
+  ! -path "./config/notion-ids.json" \
+  ! -path "./config/team-leads.json" \
   -exec sed -i '' \
-    -e "s/{{COMPANY_NAME}}/$COMPANY_NAME/g" \
-    -e "s/{{COMPANY_NAME_EN}}/$COMPANY_NAME_EN/g" \
-    -e "s/{{SERVICE_NAME}}/$SERVICE_NAME/g" \
-    -e "s/{{COMPANY_DOMAIN}}/$COMPANY_DOMAIN/g" \
-    -e "s/{{HR_LEAD}}/$HR_LEAD/g" \
-    -e "s/{{HR_LEAD_SLACK_ID}}/$HR_LEAD_SLACK_ID/g" \
-    -e "s/{{CEO_NAME}}/$CEO_NAME/g" \
-    -e "s/{{CPO_NAME}}/$CPO_NAME/g" \
-    -e "s/{{CBO_NAME}}/$CBO_NAME/g" \
-    -e "s/{{GITHUB_ORG}}/$GITHUB_ORG/g" \
-    -e "s/{{HR_SYSTEM}}/$HR_SYSTEM/g" \
-    -e "s/{{OFFICE_APP}}/$OFFICE_APP/g" \
-    -e "s/{{PASSWORD_MANAGER}}/$PASSWORD_MANAGER/g" \
-    -e "s|{{LEADERBOARD_URL}}|$LEADERBOARD_URL|g" \
+    -e "s/팀스페이스/$COMPANY_KO/g" \
+    -e "s/TeamSpace Inc./$COMPANY_EN/g" \
+    -e "s/콜라보/$SERVICE_KO/g" \
+    -e "s/Collabo/$SERVICE_EN/g" \
+    -e "s/teamspace.io/$DOMAIN/g" \
+    -e "s/Dana/$HR_LEAD/g" \
+    -e "s/teamspace-ai-all/$GITHUB_ORG/g" \
     {} +
 ```
 
-> **Linux 사용자**: `sed -i ''` 대신 `sed -i`를 사용하세요.
+Linux는 `sed -i ''` 대신 `sed -i`를 사용합니다.
 
-### 치환 확인
+확인:
 
 ```bash
-# 아직 치환되지 않은 플레이스홀더가 있는지 확인
-grep -r "{{.*}}" --include="*.md" --include="*.json" . | grep -v ".git/"
+# 가상 회사 정보가 남아있는지 확인
+grep -R "TeamSpace\|팀스페이스\|Collabo\|콜라보\|teamspace.io\|Dana\|teamspace-ai-all" \
+  --include="*.md" --include="*.json" . \
+  | grep -v ".git/"
 ```
 
 ---
 
-## 5. 선택적 커스터마이징
+## 3. content/ 로컬 콘텐츠 갱신
 
-### 리더보드 (Step 0 Phase 4)
+최신 버전은 신규입사자 세션 중 공용 콘텐츠를 Notion에서 매번 fetch하지 않습니다. 대신 `content/` 로컬 사본을 읽습니다.
 
-사내 Claude Code 토큰 사용량 리더보드를 운영하지 않는 경우:
+### 갱신 흐름
 
-1. `.claude/skills/step0-setup/references/phase4-github-leaderboard.md` 파일을 삭제하거나 비활성화
-2. `.claude/skills/step0-setup/SKILL.md`에서 Phase 4 관련 내용 제거
-3. `{{LEADERBOARD_URL}}` 플레이스홀더는 무시
+```text
+Notion에서 콘텐츠 편집
+  ↓
+Claude Code에서 /sync-content 실행
+  ↓
+content/*.md 갱신
+  ↓
+git commit
+  ↓
+신규입사자 세션은 content/를 즉시 Read
+```
 
-### 직무별 시나리오 추가/제거 (Step 3)
+### 동기화 대상
 
-자사 조직 구조에 따라 시나리오 파일을 추가하거나 제거할 수 있습니다.
+| Notion 키 | 로컬 파일 | 용도 |
+|---|---|---|
+| `step1_general` | `content/step1-general.md` | 회사 문화/도구/일반 온보딩 |
+| `step2_product` | `content/step2-product-guide.md` | 제품 체험 가이드 |
+| `step3_biz` | `content/step3-biz.md` | BM/고객 여정 |
+| `step6_live_audit` | `content/step6-live-audit.md` | 참관 가이드 |
+| `github_guide` | `content/github-guide.md` | GitHub 사용 가이드 |
 
-- 기본 제공: `phase2-scenarios-sales.md`, `phase2-scenarios-product.md`, `phase2-scenarios-dev.md`, `phase2-scenarios-cx.md`, `phase2-scenarios-mgmt.md`
-- 추가가 필요한 경우: 같은 형식으로 `phase2-scenarios-{직무}.md` 파일을 만들고, SKILL.md에서 참조 추가
-- 불필요한 직무: 해당 파일을 삭제하고 SKILL.md에서 참조 제거
+실행:
 
-### Step 6 실서비스 참관
+```text
+/sync-content
+```
 
-실서비스 참관 Step은 온라인 교육 서비스 기준으로 작성되어 있습니다. 자사 서비스 특성에 따라:
+특정 키만 갱신:
 
-- `.claude/skills/step6-live-audit/references/phase1-preparation.md` — 참관 준비 사항 수정
-- `.claude/skills/step6-live-audit/references/phase2-report.md` — 리포트 양식 수정
+```text
+/sync-content step3_biz
+```
 
-### 온보딩 커맨드
-
-`.claude/commands/onboarding.md` 파일이 `/onboarding` 슬래시 커맨드의 진입점입니다. 필요에 따라 Step 순서를 조정하거나 Step을 추가/제거할 수 있습니다.
-
-### 에이전트 설정
-
-`.claude/agents/onboarding-agent.md` 파일에서 온보딩 에이전트의 행동 규칙을 조정할 수 있습니다.
+주의:
+- `content/`는 파생물입니다. 가능하면 Notion 원본을 수정한 뒤 `/sync-content`로 갱신하세요.
+- fetch 실패 시 기존 로컬 사본은 덮어쓰지 않습니다.
+- 칸반, 개밥먹기 문서, AI 개선안처럼 신규입사자별로 생성되는 개인 페이지는 `content/`로 옮기지 않습니다.
 
 ---
 
-## 체크리스트: 커스터마이징 완료 확인
+## 4. 파일별 커스터마이징 포인트
 
-- [ ] 플레이스홀더 14개 모두 치환 완료
-- [ ] `config/notion-ids.json`에 자사 Notion 페이지 ID 입력
-- [ ] `config/team-leads.json`에 자사 조직 구조 입력
-- [ ] `references/culture-deck.md`에 자사 컬쳐덱 내용 작성
-- [ ] `references/phase1-bm.md`에 자사 BM 정보 작성
-- [ ] 직무별 시나리오 파일 작성 (최소 2~3개)
-- [ ] Notion 사전 학습 페이지 게시
-- [ ] `grep -r "{{.*}}" .` 실행하여 미치환 플레이스홀더 없음 확인
-- [ ] `/onboarding` 커맨드 테스트 실행
+### 루트 문서
+
+| 파일 | 작업 |
+|---|---|
+| `README.md` | 공개 소개, 회사 설정 표, Getting Started 수정 |
+| `CLAUDE.md` | 프로젝트 규칙, 회사명, 도메인, GitHub org, Step 설명 수정 |
+| `CUSTOMIZATION.md` | 자사 운영 방식에 맞게 가이드 보정 |
+
+### Step 0 — Setup
+
+| 파일 | 작업 |
+|---|---|
+| `.claude/skills/step0-setup/SKILL.md` | Phase 구성 조정 |
+| `.claude/skills/step0-setup/references/phase1-mcp-connect.md` | 연결할 MCP 서비스 수정 |
+| `.claude/skills/step0-setup/references/phase2-claude-tips.md` | 자사 Claude 사용 팁 추가 |
+| `.claude/skills/step0-setup/references/phase3-settings-optimization.md` | 설정/Output Style 안내 수정 |
+| `.claude/skills/step0-setup/references/phase4-github-leaderboard.md` | 리더보드 미운영 시 제거/비활성화 |
+
+각 Phase의 CHECK가 별도 파일로 분리되어 있으면 `{phase}-check.md`도 함께 수정합니다.
+
+### Step 1 — General
+
+| 파일 | 작업 |
+|---|---|
+| `content/step1-general.md` | 회사 문화, 수습평가, 도구, 첫 주 체크리스트 |
+| `.claude/skills/step1-general/references/culture-deck.md` | 요약형 컬쳐덱 |
+| `.claude/skills/step1-general/references/phase1-culture.md` | 문화 소개 흐름 |
+| `.claude/skills/step1-general/references/phase2-tools.md` | 업무 도구 세팅 흐름 |
+| `.claude/skills/step1-general/references/phase3-checklist.md` | Slack 인사/체크리스트 흐름 |
+
+### Step 2 — Product
+
+| 파일 | 작업 |
+|---|---|
+| `content/step2-product-guide.md` | 제품 체험 가이드 |
+| `.claude/skills/step2-product/references/phase0-product-team.md` | 제품 조직 소개 |
+| `.claude/skills/step2-product/references/phase1-experience.md` | 제품 체험 진행 방식 |
+| `.claude/skills/step2-product/references/phase2-report.md` | AI 개선안/리포트 작성 흐름 |
+| `templates/step2-product-report.md` | 제품 체험 리포트 템플릿 |
+
+### Step 3 — Biz
+
+| 파일 | 작업 |
+|---|---|
+| `content/step3-biz.md` | BM, 고객 여정, 핵심 지표 |
+| `.claude/skills/step3-biz/references/phase0-biz-team.md` | 사업/Growth 조직 소개 |
+| `.claude/skills/step3-biz/references/phase1-bm.md` | BM 설명 흐름 |
+| `.claude/skills/step3-biz/references/phase2-customer.md` | 고객 여정 설명 |
+| `.claude/skills/step3-biz/references/phase2-scenarios-*.md` | 직무별 시나리오 퀴즈 |
+| `.claude/skills/step3-biz/references/phase3-team-deep-dive.md` | 팀별 심화 |
+| `templates/step3-biz-report.md` | BM 리포트 템플릿 |
+
+시나리오/퀴즈 파일은 **본문 + 질문 + 선택지**가 모두 일반 메시지로 출력되도록 작성해야 합니다. AskUserQuestion 위젯으로 시나리오 본문을 대체하지 마세요.
+
+### Step 4 — Build Your First Skill
+
+| 파일 | 작업 |
+|---|---|
+| `.claude/skills/step4-skill/SKILL.md` | GitHub org/PR 운영 방식 |
+| `.claude/skills/step4-skill/references/phase1-skill-anatomy.md` | 스킬 해부 설명 |
+| `.claude/skills/step4-skill/references/phase2-design.md` | 스킬 설계 워크시트 |
+| `.claude/skills/step4-skill/references/phase3-implementation.md` | 구현/PR 안내 |
+| `content/github-guide.md` | GitHub 사용 가이드 |
+
+### Step 5 — Wrap Up
+
+| 파일 | 작업 |
+|---|---|
+| `.claude/skills/step5-wrapup/SKILL.md` | 회고/마무리 규칙 |
+| `.claude/skills/step5-wrapup/references/phase1-retrospective.md` | 회고 질문 |
+| `.claude/skills/step5-wrapup/references/phase2-action-plan.md` | 첫 주 실행계획 |
+| `.claude/skills/step5-wrapup/references/phase3-feedback.md` | 피드백 수집 |
+
+### Step 6 — Live Audit
+
+| 파일 | 작업 |
+|---|---|
+| `content/step6-live-audit.md` | 참관 가이드 |
+| `.claude/skills/step6-live-audit/SKILL.md` | Step 6 운영 방식 |
+| `.claude/skills/step6-live-audit/references/phase1-preparation.md` | 참관 준비 |
+| `.claude/skills/step6-live-audit/references/phase2-report.md` | 참관 리포트 |
+
+자사 서비스 특성에 맞게 “Enterprise 온보딩 세션 참관”을 고객콜, 영업 미팅, 수업 참관, CS 티켓 분석 등으로 바꾸면 됩니다.
+
+---
+
+## 5. 운영 전 검증 체크리스트
+
+- [ ] `config/notion-ids.json`에 실제 Notion ID 입력
+- [ ] `config/team-leads.json`에 실제 팀/리더/Slack ID 입력
+- [ ] 회사명/서비스명/도메인/GitHub org 치환 완료
+- [ ] `content/*.md`를 `/sync-content`로 갱신
+- [ ] `grep -R "TeamSpace\|팀스페이스\|Collabo\|콜라보\|teamspace.io\|Dana"` 결과 확인
+- [ ] 각 Step의 `{phase}.md`와 `{phase}-check.md` 쌍 수정 여부 확인
+- [ ] 시나리오 퀴즈가 AskUserQuestion이 아닌 plain text 출력 규칙을 따르는지 확인
+- [ ] `/onboarding` 테스트 실행
+- [ ] 신규입사자에게 전달할 설치/접속 안내 준비
+
+---
+
+## 6. 원본 동기화 스크립트
+
+이 레포는 운영 원본 레포의 최신 구조를 템플릿에 반영하기 위한 `scripts/sync-from-source.sh`를 포함합니다.
+
+```bash
+cp scripts/.env.example scripts/.env.local
+# SOURCE_REPO=/path/to/source-onboarding 으로 설정
+./scripts/sync-from-source.sh --dry-run
+./scripts/sync-from-source.sh
+```
+
+주의:
+- `--dry-run`으로 변경 범위를 먼저 확인하세요.
+- `README.md`, `CUSTOMIZATION.md`, `LICENSE`, `scripts/`, `config/*.example.json`은 템플릿 고유 파일이라 보존됩니다.
+- 동기화 후 회사명 잔여 스캔과 `git diff` 검토를 반드시 수행하세요.

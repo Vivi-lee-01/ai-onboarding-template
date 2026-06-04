@@ -133,7 +133,7 @@ CLAUDE.md가 뭔지 배웠으니, 가장 중요한 보안 규칙부터 적용합
 아래 명령어를 **터미널에 한 번에 복사 → 붙여넣기** 하세요:
 
 ```bash
-mkdir -p ~/.claude && cat >> ~/.claude/CLAUDE.md << 'FUTURESCHOLE_SECURITY'
+mkdir -p ~/.claude && cat >> ~/.claude/CLAUDE.md << 'TEAMSPACE_SECURITY'
 
 # 팀스페이스 GitHub 보안 규칙
 - .env, .env.* 파일은 절대 git에 커밋하지 마라
@@ -144,7 +144,7 @@ mkdir -p ~/.claude && cat >> ~/.claude/CLAUDE.md << 'FUTURESCHOLE_SECURITY'
 - 실수로 민감 파일을 커밋했다면 즉시 경고하고, 해당 키/비밀번호를 변경하도록 안내하라
 - 커밋 메시지는 한글로 명확하게 작성하라 (예: "폰스크리닝 자동화 v2 추가")
 - git push --force 는 절대 사용하지 마라
-FUTURESCHOLE_SECURITY
+TEAMSPACE_SECURITY
 ```
 
 > ✅ 최초 **한 번만 실행하면 됩니다.** 기존 설정에 영향 없이, 보안 규칙이 뒤에 추가됩니다.
@@ -187,16 +187,3 @@ FUTURESCHOLE_SECURITY
 3가지를 다 해봤으면 "완료" 또는 "다음"이라고 입력해주세요!
 
 ---
-
-## CHECK
-
-- 질문: "보안 규칙 적용하고, CLAUDE.md 확인하고, 플러그인 정리까지 해봤나요?"
-- 확인 항목:
-  - 🔒 `~/.claude/CLAUDE.md`에 보안 규칙이 추가되었는지 (필수 — 미적용 시 반드시 실행하게 할 것)
-  - CLAUDE.md가 무엇인지, 왜 중요한지 이해했는지
-  - `/plugins`에서 현재 플러그인 목록을 확인했는지
-  - 불필요한 플러그인을 1개 이상 껐는지
-  - settings.json의 역할을 대략적으로 이해했는지
-- "잘하셨어요! 이제 Claude Code가 여러분의 업무에 딱 맞게 세팅되었어요."
-- "앞으로 새 플러그인이 필요하면 `/plugins`에서 언제든 켤 수 있어요."
-- 궁금한 점이 있으면 답변 후 Step 0 마무리로 진행

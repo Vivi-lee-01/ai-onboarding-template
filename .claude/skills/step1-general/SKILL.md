@@ -12,10 +12,13 @@ description: "Step 1 General Onboarding - 회사 문화, 업무 도구 세팅, S
 없음 — Step 1은 세팅 완료가 목표이며, 진행 상태는 `progress.json`에 기록된다.
 
 ## STOP PROTOCOL — 절대 위반 금지
+> 🔑 **점진적 공개(HARD RULE)**: EXECUTE 과제가 2개 이상이면 한 번에 쏟지 말고 핵심 1개씩 제시→STOP→"다음"으로 진행한다. EXPLAIN은 요약 먼저, 상세는 요청 시 펼친다. (프로젝트 CLAUDE.md "EXECUTE 과제 제시 — 점진적 공개" 참조)
 
 > 이 프로토콜은 이 스킬의 최우선 규칙이다.
 
 ### 각 Phase는 반드시 2턴에 걸쳐 진행한다
+
+> 단, EXECUTE에 신규입사자가 직접 할 실행 과제가 없는 읽기 전용 Phase는 CLAUDE.md 예외에 따라 EXPLAIN+CHECK를 1턴으로 진행한다.
 
 Phase A (첫 번째 턴):
 1. references/에서 해당 Phase 파일의 EXPLAIN 섹션을 읽는다
@@ -34,21 +37,17 @@ Phase B (두 번째 턴):
 1. references/에서 해당 Phase 파일의 CHECK 섹션을 읽는다
 2. AskUserQuestion으로 완료 확인을 한다
 3. 피드백 + 격려
-4. AskUserQuestion으로 묻는다:
-   "다음 Phase로 넘어갈까요?
-    1. 넘어갈게요
-    2. 조금 더 알아보고 싶어요"
-   → "2"를 선택하면 질문/재실습을 자유롭게 진행한 뒤 다시 4번을 묻는다
+4. 기본적으로 다음 Phase로 바로 진행한다. 다만 "더 알아보고 싶거나 멈추고 싶으면 말씀해주세요"라고 한 줄 안내한다.
+   (매 Phase마다 AskUserQuestion으로 진행 여부를 묻지 않는다 — 신규입사자가 멈추자고 할 때만 멈춘다)
 
-## Notion 동적 참조
+## 콘텐츠 참조 (로컬 우선)
 
-이 스킬에서 Notion 콘텐츠가 필요한 경우:
-1. `config/notion-ids.json` 파일을 읽어서 해당 페이지 ID를 확인한다
-2. notion-fetch MCP로 해당 페이지의 최신 콘텐츠를 가져온다
-3. 가져온 콘텐츠를 references의 구조에 맞춰 신규입사자에게 전달한다
+이 스킬의 공용 콘텐츠는 `content/`의 로컬 사본을 읽는다 (런타임 Notion fetch 없음):
+1. 콘텐츠가 필요하면 `content/step1-general.md`를 Read한다 (즉시)
+2. 내용을 references의 STOP PROTOCOL 구조에 맞춰 신규입사자에게 전달한다
+3. `content/`가 비어 있거나 없으면(아직 미동기화) references 본문의 인라인 내용으로 진행한다
 
-특히 Phase 1에서 Step 1 General Onboarding 노션 페이지(`step1_general` ID)를 fetch하여
-최신 체크리스트 항목을 동적으로 반영해야 한다.
+> 콘텐츠 최신화는 운영자가 `/sync-content`로 갱신한다. 신규입사자 세션은 fetch하지 않는다.
 
 ## References 파일 맵
 

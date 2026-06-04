@@ -29,7 +29,7 @@
     "prompt": "Step 1의 Notion 콘텐츠를 가져와줘",
     "assertions": [
       "config/notion-ids.json에서 step1_general ID를 읽어야 한다",
-      "notion-fetch MCP로 해당 페이지 콘텐츠를 가져와야 한다",
+      "content/step1-general.md 로컬 사본을 읽어 최신 콘텐츠를 전달해야 한다",
       "가져온 콘텐츠의 핵심 항목을 정리해서 보여줘야 한다"
     ]
   }

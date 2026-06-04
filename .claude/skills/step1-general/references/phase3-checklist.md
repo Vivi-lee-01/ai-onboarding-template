@@ -15,6 +15,8 @@ Slack에 간단히 인사를 남겨볼까요?
 
 ## EXECUTE
 
+> ⚠️ 공개 채널(#00-collabo-announcements) 발송이므로, 발송 **전에** 메시지 초안을 신규입사자에게 보여주고 "이대로 보낼까요?" 한 번 확인받는다. (전사 공개라 실수 방지)
+
 Claude Code로 `#00-collabo-announcements` 채널에 간단한 인사를 보내봅니다.
 
 예시:
