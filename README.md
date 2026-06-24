@@ -73,9 +73,11 @@ cd your-onboarding
 ```bash
 cp config/notion-ids.example.json config/notion-ids.json
 cp config/team-leads.example.json config/team-leads.json
+# 실제 Notion ID / Slack ID를 채운 뒤 운영 가드 통과 확인
+python3 scripts/check-operational-config.py
 ```
 
-> `notion-ids.json`과 `team-leads.json`은 `.gitignore`에 등록되어 있어 실수로 커밋되지 않습니다.
+> `notion-ids.json`과 `team-leads.json`은 `.gitignore`에 등록되어 있어 실수로 커밋되지 않습니다. 이 점검이 실패하면 온보딩 본문은 진행되더라도 Notion 카드 이동/Slack DM은 성공 처리하지 않습니다.
 
 ### 3. 자사 정보로 커스터마이징
 

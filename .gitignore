@@ -5,6 +5,8 @@ _workspace/
 
 # 로컬 동기화 설정 — 개인 경로/환경값 포함 가능
 scripts/.env.local
+config/notion-ids.json
+config/team-leads.json
 
 # 이미지 파일 — 레퍼런스 이미지는 텍스트(md)로 변환 후 사용
 *.png

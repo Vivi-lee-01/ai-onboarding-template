@@ -1,5 +1,6 @@
 {
   "ceo": { "nickname": "{{CEO_NAME}}", "role": "대표", "slack_id": "UXXXXXXXXXX" },
+  "hr_lead": { "nickname": "{{HR_LEAD}}", "role": "HR Lead", "slack_id": "{{HR_LEAD_SLACK_ID}}" },
   "team_leads": {
     "개발팀": {
       "leader": { "nickname": "DevLead", "role": "CTO", "slack_id": "UXXXXXXXXXX" },
